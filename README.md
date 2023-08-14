@@ -1,29 +1,17 @@
-Woof App
-==================================
+# Material Theme Builder Compose Export
 
-The Woof app is a list of dog photos with information about them including their name, age, and favorite activity. This app also uses Material Design to create a beautiful app experience for the user.
+## Basics
 
-Introduction
-------------
+This archive contains a number of files defining a Material 3 theme:
 
-This is the starter code for the Woof app project. This project is an opportunity for you to learn Material3 and reinforce the concepts you've learned so far in Android Basics with Compose.
+ * ui/theme/Color.kt        - contains all colors used by your theme
+ * ui/theme/Theme.kt        - assigns those colors to roles
+ *                          - includes code to instantiate an app theme
 
-Pre-requisites
---------------
+In your project, you can copy the two directories to /app/src/main/java/<your_package>/.
 
-- Rows/Columns
-- Modifiers
-- Scaffold
-- Adding images
-- Button click handlers
-- Functions
-- Classes
-- Lists
-- App architecture
+The files attach a default package name of com.example.ui.theme. You will want
+to change that to your actual package name for your app.
 
-Getting Started
----------------
-
-1. Download the project
-2. Open the project in Android Studio
-3. Run the project
+Please note that in Android Studio, the Android project view groups some directories together.
+For example, /ui/theme will appear in the ui as ui.theme .

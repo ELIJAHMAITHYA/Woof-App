@@ -1,5 +1,3 @@
-
-
 package com.example.woof
 
 import android.os.Bundle
@@ -16,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -26,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.woof.data.Dog
 import com.example.woof.data.dogs
 import com.example.woof.ui.theme.WoofTheme
@@ -51,13 +51,15 @@ class MainActivity : ComponentActivity() {
  */
 @Composable
 fun WoofApp() {
-    LazyColumn {
+    LazyColumn() {
         items(dogs) {
-            DogItem(dog = it)
+            DogItem(
+                dog = it,
+                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
+            )
         }
     }
 }
-
 /**
  * Composable that displays a list item containing a dog icon and their information.
  *
@@ -68,14 +70,18 @@ fun WoofApp() {
 fun DogItem(
     dog: Dog,
     modifier: Modifier = Modifier
+        .padding(8.dp)
 ) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(dimensionResource(R.dimen.padding_small))
-    ) {
-        DogIcon(dog.imageResourceId)
-        DogInformation(dog.name, dog.age)
+    Card(modifier = Modifier) {
+
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+            //.padding(dimensionResource(R.dimen.padding_small))
+        ) {
+            DogIcon(dog.imageResourceId)
+            DogInformation(dog.name, dog.age)
+        }
     }
 }
 
@@ -126,7 +132,7 @@ fun DogInformation(
         )
         Text(
             text = stringResource(R.string.years_old, dogAge),
-           // style = MaterialTheme.typography.labelMedium
+            // style = MaterialTheme.typography.labelMedium
 
         )
     }
