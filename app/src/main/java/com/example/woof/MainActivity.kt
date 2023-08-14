@@ -34,7 +34,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WoofTheme {
+            WoofTheme(darkTheme = false) {
+
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize()
@@ -144,7 +145,7 @@ fun DogInformation(
 @Preview
 @Composable
 fun WoofPreview() {
-    WoofTheme(darkTheme = false) {
+    WoofTheme(darkTheme = true) {
         WoofApp()
     }
 }
