@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WoofTheme(darkTheme = true) {
+            WoofTheme(darkTheme = false) {
 
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -128,12 +128,13 @@ fun DogInformation(
         Text(
             text = stringResource(dogName),
             modifier = Modifier.padding(top = dimensionResource(R.dimen.padding_small)),
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.displayMedium,
             fontWeight = FontWeight.Bold
 
         )
         Text(
             text = stringResource(R.string.years_old, dogAge),
+            style = MaterialTheme.typography.bodyLarge,
             // style = MaterialTheme.typography.labelMedium
 
         )
