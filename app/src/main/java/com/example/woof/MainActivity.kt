@@ -20,6 +20,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -28,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.woof.data.Dog
 import com.example.woof.data.dogs
+import com.example.woof.ui.theme.Shapes
 import com.example.woof.ui.theme.WoofTheme
 
 class MainActivity : ComponentActivity() {
@@ -72,6 +75,7 @@ fun DogItem(
     dog: Dog,
     modifier: Modifier = Modifier
         .padding(8.dp)
+        .clip(shape = Shapes.medium)
 ) {
     Card(modifier = Modifier) {
 
@@ -100,8 +104,10 @@ fun DogIcon(
     Image(
         modifier = modifier
             .size(dimensionResource(R.dimen.image_size))
+            .clip(MaterialTheme.shapes.small)
             .padding(dimensionResource(R.dimen.padding_small)),
         painter = painterResource(dogIcon),
+        contentScale = ContentScale.Crop,
 
         // Content Description is not needed here - image is decorative, and setting a null content
         // description allows accessibility services to skip this element during navigation.
@@ -145,7 +151,7 @@ fun DogInformation(
 @Preview
 @Composable
 fun WoofPreview() {
-    WoofTheme(darkTheme = true) {
+    WoofTheme(darkTheme = false) {
         WoofApp()
     }
 }
