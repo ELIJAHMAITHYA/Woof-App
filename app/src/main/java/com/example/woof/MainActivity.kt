@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WoofTheme(darkTheme = false) {
+            WoofTheme(darkTheme = true) {
 
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -104,18 +104,13 @@ fun DogIcon(
     Image(
         modifier = modifier
             .size(dimensionResource(R.dimen.image_size))
-            .clip(MaterialTheme.shapes.small)
-            .padding(dimensionResource(R.dimen.padding_small)),
-        painter = painterResource(dogIcon),
+            .padding(dimensionResource(R.dimen.padding_small))
+            .clip(MaterialTheme.shapes.small),
         contentScale = ContentScale.Crop,
-
-        // Content Description is not needed here - image is decorative, and setting a null content
-        // description allows accessibility services to skip this element during navigation.
-
+        painter = painterResource(dogIcon),
         contentDescription = null
     )
 }
-
 /**
  * Composable that displays a dog's name and age.
  *
@@ -151,7 +146,7 @@ fun DogInformation(
 @Preview
 @Composable
 fun WoofPreview() {
-    WoofTheme(darkTheme = false) {
+    WoofTheme(darkTheme = true) {
         WoofApp()
     }
 }
