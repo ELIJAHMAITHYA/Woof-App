@@ -1,11 +1,13 @@
 package com.example.woof
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +17,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -31,13 +35,17 @@ import androidx.compose.ui.unit.dp
 import com.example.woof.data.Dog
 import com.example.woof.data.dogs
 import com.example.woof.ui.theme.Shapes
+import androidx.compose.material3.Scaffold
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import com.example.woof.ui.theme.WoofTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WoofTheme(darkTheme = false) {
+            WoofTheme(darkTheme = true) {
 
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -51,19 +59,58 @@ class MainActivity : ComponentActivity() {
 }
 
 /**
+ * CTop Bar Of the application .
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun WoofTopAppBar(
+    modifier: Modifier = Modifier
+) {
+    CenterAlignedTopAppBar(
+        title = {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(
+                    modifier = Modifier
+                        .size(dimensionResource(id = R.dimen.image_size))
+                        .padding(dimensionResource(id = R.dimen.padding_small)),
+                    painter = painterResource(id = R.drawable.ic_woof_logo),
+                    contentDescription = null
+                )
+                Text(
+                    text = stringResource(R.string.app_name),
+                    style = MaterialTheme.typography.displayLarge,
+
+                    )
+            }
+        },
+        modifier = modifier
+    )
+}
+
+/**
  * Composable that displays an app bar and a list of dogs.
  */
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun WoofApp() {
-    LazyColumn() {
-        items(dogs) {
-            DogItem(
-                dog = it,
-                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
-            )
+    Scaffold(
+        topBar = {
+            WoofTopAppBar()
+        }
+    ) {
+
+            it ->
+        LazyColumn(contentPadding = it) {
+            items(dogs) {
+                DogItem(
+                    dog = it,
+                    modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
+                )
+            }
         }
     }
 }
+
 /**
  * Composable that displays a list item containing a dog icon and their information.
  *
@@ -82,7 +129,7 @@ fun DogItem(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-            //.padding(dimensionResource(R.dimen.padding_small))
+          //  .padding(dimensionResource(R.dimen.padding_small))
         ) {
             DogIcon(dog.imageResourceId)
             DogInformation(dog.name, dog.age)
@@ -111,6 +158,7 @@ fun DogIcon(
         contentDescription = null
     )
 }
+
 /**
  * Composable that displays a dog's name and age.
  *
