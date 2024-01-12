@@ -57,7 +57,7 @@ class MainActivity : ComponentActivity() {
             WoofTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
                 ) {
                     WoofApp()
                 }
@@ -74,13 +74,13 @@ fun WoofApp() {
     Scaffold(
         topBar = {
             WoofTopAppBar()
-        }
+        },
     ) { it ->
         LazyColumn(contentPadding = it) {
             items(dogs) {
                 DogItem(
                     dog = it,
-                    modifier = Modifier.padding(dimensionResource(R.dimen.padding_small))
+                    modifier = Modifier.padding(dimensionResource(R.dimen.padding_small)),
                 )
             }
         }
@@ -96,15 +96,15 @@ fun WoofApp() {
 @Composable
 fun DogItem(
     dog: Dog,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier
+        modifier = modifier,
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(dimensionResource(R.dimen.padding_small))
+                .padding(dimensionResource(R.dimen.padding_small)),
         ) {
             DogIcon(dog.imageResourceId)
             DogInformation(dog.name, dog.age)
@@ -123,7 +123,7 @@ fun WoofTopAppBar(modifier: Modifier = Modifier) {
     CenterAlignedTopAppBar(
         title = {
             Row(
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Image(
                     modifier = Modifier
@@ -135,15 +135,15 @@ fun WoofTopAppBar(modifier: Modifier = Modifier) {
                     // null content description allows accessibility services to skip this element
                     // during navigation.
 
-                    contentDescription = null
+                    contentDescription = null,
                 )
                 Text(
                     text = stringResource(R.string.app_name),
-                    style = MaterialTheme.typography.displayLarge
+                    style = MaterialTheme.typography.displayLarge,
                 )
             }
         },
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
@@ -156,7 +156,7 @@ fun WoofTopAppBar(modifier: Modifier = Modifier) {
 @Composable
 fun DogIcon(
     @DrawableRes dogIcon: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Image(
         modifier = modifier
@@ -169,7 +169,7 @@ fun DogIcon(
         // Content Description is not needed here - image is decorative, and setting a null content
         // description allows accessibility services to skip this element during navigation.
 
-        contentDescription = null
+        contentDescription = null,
     )
 }
 
@@ -184,17 +184,17 @@ fun DogIcon(
 fun DogInformation(
     @StringRes dogName: Int,
     dogAge: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
         Text(
             text = stringResource(dogName),
             style = MaterialTheme.typography.displayMedium,
-            modifier = Modifier.padding(top = dimensionResource(R.dimen.padding_small))
+            modifier = Modifier.padding(top = dimensionResource(R.dimen.padding_small)),
         )
         Text(
             text = stringResource(R.string.years_old, dogAge),
-            style = MaterialTheme.typography.bodyLarge
+            style = MaterialTheme.typography.bodyLarge,
         )
     }
 }
